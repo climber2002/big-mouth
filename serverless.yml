@@ -1,0 +1,14 @@
+service: big-mouth
+
+provider:
+  name: aws
+  runtime: nodejs10.x
+  region: ap-southeast-2
+
+functions:
+  get-index:
+    handler: functions/get-index.handler
+    events:
+      - http:
+          path: /
+          method: get
