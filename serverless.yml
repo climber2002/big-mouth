@@ -23,7 +23,9 @@ functions:
           path: /
           method: get
     environment:
-      restaurants_api: https://gw1h1fr188.execute-api.ap-southeast-2.amazonaws.com/dev/restaurants
+      restaurants_api: https://al4xq97fwl.execute-api.ap-southeast-2.amazonaws.com/dev/restaurants
+      cognito_user_pool_id: ap-southeast-2_jhyKyjXV9
+      cognito_client_id: 63s2vbp5hhd1hqbrr77ab5lpbo
 
   get-restaurants:
     handler: functions/get-restaurants.handler
@@ -32,6 +34,17 @@ functions:
           path: /restaurants/
           method: get
           authorizer: aws_iam
+    environment:
+      restaurants_table: restaurants
+  
+  search-restaurants:
+    handler: functions/search-restaurants.handler
+    events:
+      - http:
+          path: /restaurants/search
+          method: post
+          authorizer:
+            arn: arn:aws:cognito-idp:ap-southeast-2:713355259721:userpool/ap-southeast-2_jhyKyjXV9
     environment:
       restaurants_table: restaurants
 
